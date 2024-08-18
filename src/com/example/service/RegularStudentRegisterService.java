@@ -8,8 +8,6 @@ import com.example.model.RegularStudent;
 import com.example.model.Score;
 
 public class RegularStudentRegisterService extends StudentRegisterService{	
-//	BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
-
 	public RegularStudentRegisterService() throws IOException {
 		super();
 	}
@@ -19,6 +17,5 @@ public class RegularStudentRegisterService extends StudentRegisterService{
 		System.out.println("Enter nrc number: ");
 		String nrcNumber = inputReader.readLine();
 		this.student = new RegularStudent(name,age,score,nrcNumber);
-		this.student.addStudent(this.student);
 	}
 }

@@ -1,5 +1,4 @@
 package com.example.model;
-
 public class RegularStudent extends Student {
 	private String nrcNumber; 
 	private static int regularStudentCount; 
@@ -10,4 +9,7 @@ public class RegularStudent extends Student {
 		regularStudentCount++;
 	}
 
+	public static int getRegularStudentCount() {
+		return regularStudentCount;
+	}
 }

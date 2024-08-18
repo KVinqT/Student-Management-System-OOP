@@ -10,7 +10,6 @@ import com.example.model.Score;
 import com.example.model.VisaInformation;
 
 public class InternationalStudentRegisterService extends StudentRegisterService{
-//	BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 	public InternationalStudentRegisterService() throws IOException {
 		super();
 	}
@@ -23,6 +22,5 @@ public class InternationalStudentRegisterService extends StudentRegisterService{
 		String passport = inputReader.readLine();
 		VisaInformation visaInfo = new VisaInformation(visaType, passport);
 		this.student = new InternationalStudent(name,age,score,visaInfo);
-		this.student.addStudent(this.student);
 	}
 }

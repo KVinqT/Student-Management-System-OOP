@@ -3,13 +3,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import com.example.dao.StudentDao;
+import com.example.dao.StudentDaoImpl;
+import com.example.model.InternationalStudent;
+import com.example.model.RegularStudent;
 import com.example.model.Score;
 import com.example.model.Student;
 
 public abstract class StudentRegisterService {
 	BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
 	protected Student student;
+	private StudentDao studentDao;
 	public StudentRegisterService() throws IOException {
+		this.studentDao = new StudentDaoImpl();
 		this.getStudentInfo();
 	}
 	//get student info
@@ -32,17 +38,19 @@ public abstract class StudentRegisterService {
 		int bioSub = Integer.parseInt(inputReader.readLine());
 		Score score = new Score(myanmarSub,englishSub,mathsSub,chemistrySub,physicsSub,bioSub);
 		this.getStudentInfoByType(name,age,score);
+		this.studentDao.create(this.student);
 	}
 	
 	public abstract void getStudentInfoByType(String name, int age, Score score) throws IOException;
 	
 	public void displayStudent() {
 		System.out.println("-------- Displaying student information --------");
-		for(int i = 0; i < student.getToalStudentCount(); i++) {
-			System.out.println(student);
+		for(int i = 0; i < student.getStudentCount(); i++) {
+			System.out.println(StudentDaoImpl.getStudentsList()[i]);
 		}
-		System.out.println("Total student count: " + student.getToalStudentCount());
-		System.out.println("Total regular student count: ");
-		System.out.println("Total international student count");
+
+		System.out.println("Total student count: " + student.getStudentCount());
+		System.out.println("Total regular student count: " + RegularStudent.getRegularStudentCount());
+		System.out.println("Total international student count " + InternationalStudent.getInterStudentCount());
 	}
 }
