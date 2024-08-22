@@ -1,13 +1,11 @@
 package com.example.service;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import com.example.model.Score;
+import com.example.model.InternationalStudent;
+import com.example.model.RegularStudent;
 import com.example.model.Student;
 
-public abstract class StudentRegisterService {
-	BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
+public abstract class StudentRegisterService extends BaseServices {
 	protected Student student;
 	public StudentRegisterService() throws IOException {
 		this.getStudentInfo();
@@ -18,31 +16,18 @@ public abstract class StudentRegisterService {
 		String name = inputReader.readLine();
 		System.out.println("Enter student age: ");
 		int age = Integer.parseInt(inputReader.readLine());
-		System.out.println("Enter Myanmar subject marks");
-		int myanmarSub = Integer.parseInt(inputReader.readLine());
-		System.out.println("Enter English subject marks");
-		int englishSub = Integer.parseInt(inputReader.readLine());
-		System.out.println("Enter Maths subject marks");
-		int mathsSub = Integer.parseInt(inputReader.readLine());
-		System.out.println("Enter Chemistry subject marks");
-		int chemistrySub = Integer.parseInt(inputReader.readLine());
-		System.out.println("Enter Physics subject marks");
-		int physicsSub = Integer.parseInt(inputReader.readLine());
-		System.out.println("Enter Biology subject marks");
-		int bioSub = Integer.parseInt(inputReader.readLine());
-		Score score = new Score(myanmarSub,englishSub,mathsSub,chemistrySub,physicsSub,bioSub);
-		this.getStudentInfoByType(name,age,score);
+		this.getStudentInfoByType(name,age);
 	}
 	
-	public abstract void getStudentInfoByType(String name, int age, Score score) throws IOException;
+	public abstract void getStudentInfoByType(String name, int age) throws IOException;
 	
 	public void displayStudent() {
 		System.out.println("-------- Displaying student information --------");
-		for(int i = 0; i < student.getToalStudentCount(); i++) {
-			System.out.println(student);
+		for(int i = 0; i < Student.getTotalStudentCount(); i++) {
+			System.out.println(studentDao.getAllStudents()[i]);
 		}
-		System.out.println("Total student count: " + student.getToalStudentCount());
-		System.out.println("Total regular student count: ");
-		System.out.println("Total international student count");
+		System.out.println("Total student count: " + Student.getTotalStudentCount());
+		System.out.println("Total regular student count: " + RegularStudent.getRegularStudentCount());
+		System.out.println("Total international student count" + InternationalStudent.getInternationalStudentCount());
 	}
 }

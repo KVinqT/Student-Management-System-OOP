@@ -3,11 +3,15 @@ package com.example.model;
 public class InternationalStudent extends Student {
 	
 	private VisaInformation visaInformation;
-	private int internationalStudentCount;
+	private static int internationalStudentCount;
 	
-	public InternationalStudent(String name, int age, Score score, VisaInformation visaInformation) {
-		super(name, age, score);
+	public InternationalStudent(String name, int age, VisaInformation visaInformation) {
+		super(name, age);
 		this.visaInformation = visaInformation;
 		internationalStudentCount++;
+	}
+	
+	public static int getInternationalStudentCount() {
+		return internationalStudentCount;
 	}
 }
